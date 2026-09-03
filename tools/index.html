@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mooniak Font Process — Tools &amp; Apps Directory</title>
+<meta name="description" content="A map of the repos and apps behind Mooniak's Sri Lankan-script type: standard, build system, and the apps built on top of it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff; --bg-elev:#ffffff; --ink:#0a0a0a; --ink-dim:#5c5c5c;
+    --line:#d9d9d9; --accent:#000000; --accent-ink:#000000;
+    --pub-bg:#000000; --pub-ink:#ffffff;
+    --priv-bg:#ffffff; --priv-ink:#000000;
+    --unpub-bg:#ffffff; --unpub-ink:#6b6b6b;
+    --shadow: 0 1px 2px rgba(0,0,0,.04), 0 6px 20px rgba(0,0,0,.05);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.55 "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:960px; margin:0 auto; padding:56px 24px 96px}
+  header h1{font-size:clamp(28px,4vw,38px); margin:0 0 10px; letter-spacing:-.02em}
+  header p.lede{color:var(--ink-dim); max-width:60ch; margin:0 0 6px; font-size:17px}
+  header .asof{color:var(--ink-dim); font-size:13px; margin:18px 0 0}
+  a{color:var(--accent-ink); text-decoration-thickness:1px; text-underline-offset:2px}
+  a.linkless{color:var(--ink-dim); font-style:italic; text-decoration:none}
+
+  /* pipeline diagram */
+  .pipeline{margin:44px 0 8px; padding:22px; background:var(--bg-elev); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow)}
+  .pipeline h2{margin:0 0 16px; font-size:14px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-dim)}
+  .row{display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:10px}
+  .node{
+    background:var(--bg); border:1px solid var(--ink); border-radius:10px;
+    padding:9px 14px; font-size:13px; font-weight:600; white-space:nowrap;
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+  }
+  .node.dim{font-weight:500; color:var(--ink-dim); border-color:var(--line)}
+  .arrow{color:var(--ink-dim); font-size:15px}
+  .branch{display:flex; flex-wrap:wrap; gap:24px; margin-top:6px; padding-left:26px; border-left:2px dotted var(--line)}
+  .branch .row{margin-bottom:0}
+  .aside-note{margin-top:16px; font-size:13px; color:var(--ink-dim); border-top:1px dashed var(--line); padding-top:14px}
+
+  /* legend */
+  .legend{display:flex; gap:16px; flex-wrap:wrap; margin:28px 0 4px; font-size:13px; color:var(--ink-dim)}
+  .legend .pill{margin-right:6px}
+
+  .pill{
+    display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:.02em;
+    padding:3px 9px; border-radius:999px; text-transform:uppercase;
+    font-family:"IBM Plex Mono", ui-monospace, monospace; border:1.5px solid var(--ink);
+  }
+  .pill.public{background:var(--pub-bg); color:var(--pub-ink); border-color:#000}
+  .pill.private{background:var(--priv-bg); color:var(--priv-ink); border-color:#000}
+  .pill.unpub{background:var(--unpub-bg); color:var(--unpub-ink); border:1.5px dashed #999}
+
+  /* cards */
+  .section-title{margin:52px 0 18px; font-size:22px; letter-spacing:-.01em}
+  .grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:16px}
+  .card{
+    background:var(--bg-elev); border:1px solid var(--line); border-radius:14px;
+    padding:20px 22px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:10px;
+  }
+  .card h3{margin:0; font-size:17px}
+  .badges{display:flex; gap:6px; flex-wrap:wrap}
+  .tagline{margin:0; color:var(--ink-dim); font-size:14.5px}
+  .role{margin:0; font-size:13.5px; color:var(--ink); background:#f5f5f5; border-left:3px solid var(--accent); padding:8px 10px; border-radius:4px}
+  .tech{font-size:12px; color:var(--ink-dim); font-family:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace}
+  .card-links{margin-top:auto; display:flex; gap:14px; flex-wrap:wrap; font-size:13.5px; padding-top:4px}
+  .card.context{opacity:.92}
+
+  footer{margin-top:64px; padding-top:20px; border-top:1px solid var(--line); color:var(--ink-dim); font-size:13px}
+
+  code{font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:.9em; background:#f0f0f0; border:1px solid var(--line); border-radius:4px; padding:1px 5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Mooniak Font Process — Tools &amp; Apps</h1>
+    <p class="lede">A map of the repos and apps that make Sri Lankan-script type happen at
+      Mooniak: from the glyphset standard, through the build system, out to the apps people
+      actually use.</p>
+    <p class="lede">Some of these are public today; several are still private or unpublished
+      &mdash; marked on each card below.</p>
+    <p class="asof">Status current as of July 2026 — private repos in particular move fast.
+      Full write-up in <a href="../TOOLS.md">TOOLS.md</a>.</p>
+  </header>
+
+  <div class="pipeline">
+    <h2>How it fits together</h2>
+    <div class="row">
+      <span class="node">Lanka Glyphsets</span><span class="arrow">→</span>
+      <span class="node">Sinhala Font Tools</span><span class="arrow">→</span>
+      <span class="node dim">font-repos (~90 repos)</span><span class="arrow">→</span>
+      <span class="node">mnik build system</span>
+    </div>
+    <div class="branch">
+      <div class="row">
+        <span class="arrow">↳</span><span class="node dim">directory (public showcase)</span>
+      </div>
+      <div class="row">
+        <span class="arrow">↳</span><span class="node">fontpipe</span><span class="arrow">→</span>
+        <span class="node">Akuru App</span><span class="node dim">(font library)</span>
+      </div>
+    </div>
+    <p class="aside-note">Separately, <strong>Bookpress</strong> pulls Lanka Glyphsets-conformant
+      fonts directly for its Sinhala shaping tests — a real-world proving ground for the
+      standard, outside the mnik/fontpipe distribution path.</p>
+  </div>
+
+  <div class="legend">
+    <span><span class="pill public">Public</span> repo is open on GitHub</span>
+    <span><span class="pill private">Private</span> repo exists, access-restricted</span>
+    <span><span class="pill unpub">Unpublished</span> no public repo / local only</span>
+  </div>
+
+  <h2 class="section-title">The pipeline</h2>
+  <div class="grid">
+
+    <article class="card">
+      <h3>Lanka Glyphsets</h3>
+      <div class="badges"><span class="pill public">Public</span></div>
+      <p class="tagline">The standard: Sinhala + Tamil glyphset tiers and glyph naming standard.</p>
+      <p class="role">Defines what a conformant font must contain — four cumulative Sinhala
+        tiers (Kernel/Core/Plus/Pro) plus a Tamil glyphset.</p>
+      <div class="tech">TypeScript · Python (lankafea) · npm + PyPI</div>
+      <div class="card-links"><a href="https://github.com/mooniak/lanka-glyphsets">GitHub →</a></div>
+    </article>
+
+    <article class="card">
+      <h3>Sinhala Font Tools</h3>
+      <div class="badges"><span class="pill public">Public</span></div>
+      <p class="tagline">Shared dev toolkit: docs, design-stage tracking, glyph charts, test texts.</p>
+      <p class="role">The toolkit every font-repos project draws on — project-status
+        conventions, release channels, and glyph charts built from Lanka Glyphsets data.</p>
+      <div class="tech">Docs · YAML · browser tools</div>
+      <div class="card-links"><a href="https://github.com/mooniak/sinhala-font-tools">GitHub →</a></div>
+    </article>
+
+    <article class="card">
+      <h3>Build tools — mnik</h3>
+      <div class="badges"><span class="pill private">Private</span></div>
+      <p class="tagline">mooniak-font-tools — the build system behind every font repo.</p>
+      <p class="role">Homebase for the ~90 repos in <code>font-repos/</code>: builds, QAs,
+        proofs, and publishes each one, and generates <code>channel-index.json</code> — the
+        feed fontpipe reads.</p>
+      <div class="tech">Python · gftools · fontspector · Flask dashboard</div>
+      <div class="card-links"><a href="https://github.com/mooniak/mooniak-font-tools">GitHub →</a></div>
+    </article>
+
+    <article class="card">
+      <h3>fontpipe</h3>
+      <div class="badges"><span class="pill private">Private</span></div>
+      <p class="tagline">GitHub-native font package manager — desktop distribution app.</p>
+      <p class="role">Reads mnik's channel index plus each repo's
+        <code>fontpackage.json</code>; installs and auto-updates fonts system-wide.</p>
+      <div class="tech">Tauri 2 · Rust · React</div>
+      <div class="card-links"><a href="https://github.com/mooniak/fontpackagemanager">GitHub →</a> (repo named fontpackagemanager)</div>
+    </article>
+
+    <article class="card">
+      <h3>Bookpress</h3>
+      <div class="badges"><span class="pill unpub">Unpublished</span></div>
+      <p class="tagline">Book-typesetting desktop app, Typst-powered.</p>
+      <p class="role">Not yet pushed to GitHub. Lays out actual trilingual
+        (Sinhala/Tamil/English) books — the most concrete real-world consumer of the whole
+        font pipeline.</p>
+      <div class="tech">Tauri 2 · Rust · Typst · Lexical</div>
+      <div class="card-links"><span class="linkless">no public repo yet</span></div>
+    </article>
+
+    <article class="card">
+      <h3>Akuru App</h3>
+      <div class="badges"><span class="pill public">Landing: Public</span> <span class="pill unpub">App: Unpublished</span></div>
+      <p class="tagline">Consumer super-app: font library, canvas, glossary, text converter.</p>
+      <p class="role">The font library tool is the end-user face of the whole pipeline — a
+        font installer built on fontpipe's distribution technology. Alpha stage, waitlist open.</p>
+      <div class="tech">Desktop app</div>
+      <div class="card-links">
+        <a href="https://github.com/mooniak/akuruapp-landing">Landing repo →</a>
+        <a href="https://forms.gle/9D8DZY5xeRqGxFAFA">Waitlist →</a>
+      </div>
+    </article>
+
+  </div>
+
+  <h2 class="section-title">Also worth knowing about</h2>
+  <div class="grid">
+    <article class="card context">
+      <h3>directory</h3>
+      <div class="badges"><span class="pill public">Public</span></div>
+      <p class="tagline">Public showcase site for every Mooniak typeface — src.mooniak.com.</p>
+      <p class="role">The visible, human-facing output of the pipeline: a static Astro site
+        whose data is entirely generated and pushed by <code>mnik showcase --publish</code>.</p>
+      <div class="card-links"><a href="https://github.com/mooniak/directory">GitHub →</a></div>
+    </article>
+  </div>
+
+  <footer>
+    Part of <a href="../">mooniak.github.io</a>. Source and longer write-up:
+    <a href="../TOOLS.md">TOOLS.md</a>.
+  </footer>
+
+</div>
+</body>
+</html>
