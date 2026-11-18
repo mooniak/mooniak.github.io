@@ -1,0 +1,20 @@
+{
+  "org": "mooniak",
+  "siteBase": "https://src.mooniak.com",
+  "website": {
+    "repo": "mooniak/mooniak.com",
+    "toolsPath": "content/tools/tools.json",
+    "url": "https://mooniak.com"
+  },
+  "fonts": {
+    "include": [
+      "amma-font",
+      "atlas-handwriting-font"
+    ],
+    "exclude": [
+      "mooniak-font-project-template"
+    ],
+    "_note": "A public, non-archived repo with fontpackage.json is a font. include adds repos without one; exclude drops repos that have one. Forks of other foundries' fonts are left out unless included."
+  },
+  "recentIssues": 25
+}
