@@ -1,0 +1,71 @@
+name: Dashboard
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "17 */6 * * *" # every 6 hours
+  workflow_dispatch:
+  # A font repo's CI can ask for a refresh after it publishes build.json:
+  #   gh api repos/mooniak/mooniak.github.io/dispatches -f event_type=font-built
+  repository_dispatch:
+    types: [font-built]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.event_name == 'pull_request' && github.ref || 'deploy' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    name: Collect and render
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Collect data
+        run: node scripts/collect.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Optional: fine-grained token with Contents: read on mooniak/mooniak.com,
+          # so the tools list follows the website. Without it, data/tools.json is used.
+          WEBSITE_TOKEN: ${{ secrets.WEBSITE_TOKEN }}
+      - name: Render page
+        run: node scripts/render.mjs
+      - name: Summary
+        run: |
+          node -e '
+            const d = require("./_site/data/dashboard.json");
+            const out = [
+              `### ${d.fonts.length} fonts, ${d.tools.length} tools (from ${d.toolsSource}), ${d.issues.length} recent issues`,
+              ...d.errors.map((e) => `- error: **${e.where}**: ${e.message}`),
+              ...d.warnings.map((w) => `- warning: **${w.repo}**: ${w.message}`),
+            ];
+            require("fs").appendFileSync(process.env.GITHUB_STEP_SUMMARY, out.join("\n") + "\n");
+          '
+      - name: Upload Pages artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+  deploy:
+    name: Deploy to GitHub Pages
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v5

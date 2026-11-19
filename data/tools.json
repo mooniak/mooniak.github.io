@@ -1,0 +1,94 @@
+[
+  {
+    "id": "sinhala-font-tools",
+    "name": {
+      "en": "Sinhala Font Design",
+      "si": "සිංහල අකුරු නිර්‍මාණය",
+      "ta": "சிங்கள எழுத்துரு வடிவமைப்பு"
+    },
+    "description": {
+      "en": "Design research and browser tools for drawing Sinhala type: a dependency-based drawing order, spacing and composite models, a glyph chart tester, a test-text generator and side-by-side font comparison.",
+      "si": "සිංහල අකුරු ඇඳීම සඳහා නිර්‍මාණ පර්‍යේෂණ සහ බ්‍රවුසර මෙවලම්: ග්ලිෆ් ඇඳිය යුතු අනුපිළිවෙල, පරතර සහ සංයුක්ත ආකෘති, ග්ලිෆ් සටහන් පරීක්ෂකය, පරීක්ෂණ පෙළ ජනකය සහ අකුරු සංසන්දනය.",
+      "ta": "சிங்கள எழுத்துருக்களை வரைவதற்கான வடிவமைப்பு ஆய்வும் உலாவிக் கருவிகளும்: வரைதல் வரிசை, இடைவெளி மற்றும் கூட்டு வடிவ மாதிரிகள், எழுத்து அட்டவணைச் சோதனை, சோதனை உரை உருவாக்கி, எழுத்துரு ஒப்பீடு."
+    },
+    "category": "developer",
+    "type": "web",
+    "license": "GPL-3.0",
+    "scripts": ["Sinhala"],
+    "links": { "github": "https://github.com/mooniak/sinhala-font-tools" },
+    "featured": true
+  },
+  {
+    "id": "lanka-glyphsets",
+    "name": {
+      "en": "Lanka Glyphsets",
+      "si": "ලංකා ග්ලිෆ් කට්ටල",
+      "ta": "இலங்கை எழுத்துத் தொகுதிகள்"
+    },
+    "description": {
+      "en": "The glyphset standard for Sri Lankan fonts: cumulative Sinhala levels (Kernel, Core, Plus, Pro) mapped to ICTA levels, a Tamil glyphset and a glyph-naming standard. Published as @mooniak/lankaglyphsets on npm and mnik-lankafea on PyPI.",
+      "si": "ශ්‍රී ලාංකික අකුරු සඳහා ග්ලිෆ් කට්ටල ප්‍රමිතිය: ICTA මට්ටම්වලට ගැළපෙන සිංහල මට්ටම් හතරක් (Kernel, Core, Plus, Pro), දෙමළ ග්ලිෆ් කට්ටලයක් සහ ග්ලිෆ් නම් කිරීමේ ප්‍රමිතියක්.",
+      "ta": "இலங்கை எழுத்துருக்களுக்கான எழுத்துத் தொகுதித் தரநிலை: ICTA நிலைகளுடன் பொருந்தும் நான்கு சிங்கள நிலைகள் (Kernel, Core, Plus, Pro), ஒரு தமிழ் எழுத்துத் தொகுதி, எழுத்து உருக்களுக்கான பெயரிடல் தரநிலை."
+    },
+    "category": "standards",
+    "type": "dataset",
+    "scripts": ["Sinhala", "Tamil"],
+    "links": { "github": "https://github.com/mooniak/lanka-glyphsets" },
+    "featured": true
+  },
+  {
+    "id": "3md",
+    "name": { "en": "3md", "si": "3md", "ta": "3md" },
+    "description": {
+      "en": "An open standard for trilingual text: a plain-text format, built on Markdown, for writing Sinhala, Tamil and English versions of a document side by side in one file.",
+      "si": "ත්‍රෛභාෂික පෙළ සඳහා විවෘත ප්‍රමිතියක්: ලේඛනයක සිංහල, දෙමළ සහ ඉංග්‍රීසි පිටපත් එකම ගොනුවක පෙළගස්වා ලිවීමට Markdown මත ගොඩනැගූ සරල පෙළ ආකෘතියක්.",
+      "ta": "மும்மொழி உரைக்கான திறந்த தரநிலை: ஒரு ஆவணத்தின் சிங்கள, தமிழ், ஆங்கிலப் பதிப்புகளை ஒரே கோப்பில் அருகருகே எழுத Markdown அடிப்படையில் அமைந்த எளிய உரை வடிவம்."
+    },
+    "category": "standards",
+    "type": "spec",
+    "license": "MIT",
+    "scripts": ["Sinhala", "Tamil", "Latin"],
+    "links": {
+      "github": "https://github.com/mooniak/3md",
+      "website": "https://src.mooniak.com/3md/playground/"
+    },
+    "featured": true
+  },
+  {
+    "id": "encoding-machine",
+    "name": {
+      "en": "Encoding Machine",
+      "si": "කේතන යන්ත්‍රය",
+      "ta": "குறியாக்க இயந்திரம்"
+    },
+    "description": {
+      "en": "An interactive kiosk from the Akurugraphy exhibition that shows how a computer sees language: type in Sinhala, Tamil or Latin and watch each word break down into Unicode code points, shaped glyphs and outline geometry.",
+      "si": "පරිගණකය භාෂාව දකින ආකාරය පෙන්වන, Akurugraphy ප්‍රදර්‍ශනයේ අන්තර්‍ක්‍රියාකාරී කියොස්කයක්: සිංහලෙන්, දෙමළෙන් හෝ ලතින් අකුරින් ටයිප් කර, වචනය යුනිකෝඩ් කේත ලක්ෂ්‍ය, හැඩගැසූ ග්ලිෆ් සහ අකුරු රේඛා දක්වා බිඳී යන අයුරු බලන්න.",
+      "ta": "கணினி மொழியை எவ்வாறு பார்க்கிறது என்பதைக் காட்டும் Akurugraphy கண்காட்சியின் ஊடாடும் காட்சிப்பொறி: சிங்களம், தமிழ் அல்லது இலத்தீன் எழுத்தில் தட்டச்சு செய்து, ஒவ்வொரு சொல்லும் யூனிகோட் குறிப்புள்ளிகள், வடிவமைக்கப்பட்ட எழுத்துருக்கள், வெளிக்கோட்டு வடிவியல் எனப் பிரிவதைப் பாருங்கள்."
+    },
+    "category": "learning",
+    "type": "web",
+    "scripts": ["Sinhala", "Tamil", "Latin"],
+    "links": { "github": "https://github.com/mooniak/encoding-machine" },
+    "featured": false
+  },
+  {
+    "id": "mnik-glyphs-scripts",
+    "name": {
+      "en": "Mooniak Glyphs Scripts",
+      "si": "Mooniak Glyphs ස්ක්‍රිප්ට්",
+      "ta": "Mooniak Glyphs நிரல்கள்"
+    },
+    "description": {
+      "en": "Python scripts for the Glyphs font editor from the studio's font production, including tools for .glyphspackage sources and for setting mark categories.",
+      "si": ".glyphspackage මූලාශ්‍ර සහ ලකුණු ප්‍රවර්‍ග සැකසීම සඳහා මෙවලම් ඇතුළු, අපේ අකුරු නිෂ්පාදනයේදී භාවිත කරන Glyphs අකුරු සංස්කාරකය සඳහා Python ස්ක්‍රිප්ට්.",
+      "ta": ".glyphspackage மூலக்கோப்புகளுக்கும் குறி வகைகளை அமைப்பதற்குமான கருவிகள் உட்பட, எங்கள் எழுத்துரு உருவாக்கத்தில் பயன்படுத்தும் Glyphs எழுத்துரு திருத்திக்கான Python நிரல்கள்."
+    },
+    "category": "developer",
+    "type": "scripts",
+    "license": "GPL-3.0",
+    "scripts": ["Sinhala", "Tamil"],
+    "links": { "github": "https://github.com/mooniak/mnik-glyphs-scripts" },
+    "featured": false
+  }
+]
